@@ -1,14 +1,14 @@
-import React, { Component, ReactNode } from "react";
-import PropTypes from "prop-types";
-import cx from "classnames";
+import React, { Component, ReactNode } from 'react';
+import PropTypes from 'prop-types';
+import cx from 'classnames';
 
-import { styles } from "../utils/styles";
+import { styles } from '../utils/styles';
 import {
   MenuItemEventHandler,
   TriggerEvent,
   StyleProps,
-  InternalProps,
-} from "../types";
+  InternalProps
+} from '../types';
 
 export interface ItemProps extends StyleProps, InternalProps {
   /**
@@ -51,7 +51,7 @@ class Item extends Component<ItemProps> {
     propsFromTrigger: PropTypes.object,
     className: PropTypes.string,
     style: PropTypes.object,
-    closeOnClick: PropTypes.bool,
+    closeOnClick: PropTypes.bool
   };
 
   static defaultProps = {
@@ -65,24 +65,31 @@ class Item extends Component<ItemProps> {
 
   constructor(props: ItemProps) {
     super(props);
-    const { disabled, nativeEvent, propsFromTrigger, data, closeOnClick } = this.props;
+    const {
+      disabled,
+      nativeEvent,
+      propsFromTrigger,
+      data,
+      closeOnClick
+    } = this.props;
 
     this.isDisabled =
-      typeof disabled === "function"
+      typeof disabled === 'function'
         ? disabled({
             event: nativeEvent as TriggerEvent,
-            props: { ...propsFromTrigger, ...data },
+            props: { ...propsFromTrigger, ...data }
           })
         : disabled;
 
-    this.stayOpenOnClick = this.isDisabled ||
-    !(typeof closeOnClick === 'function'
-      ? closeOnClick({
-        event: nativeEvent as TriggerEvent,
-        props: { ...propsFromTrigger, ...data }
-      }) : closeOnClick);
+    this.stayOpenOnClick =
+      this.isDisabled ||
+      !(typeof closeOnClick === 'function'
+        ? closeOnClick({
+            event: nativeEvent as TriggerEvent,
+            props: { ...propsFromTrigger, ...data }
+          })
+        : closeOnClick);
   }
-  
 
   handleClick = (e: React.MouseEvent) => {
     if (this.stayOpenOnClick) {
@@ -101,7 +108,7 @@ class Item extends Component<ItemProps> {
     const { className, style, children } = this.props;
 
     const cssClasses = cx(styles.item, className, {
-      [`${styles.itemDisabled}`]: this.isDisabled,
+      [`${styles.itemDisabled}`]: this.isDisabled
     });
 
     return (
