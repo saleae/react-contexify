@@ -253,12 +253,10 @@ class Menu extends Component<MenuProps, MenuState> {
             onMouseEnter={this.onMouseEnter}
             onMouseLeave={this.onMouseLeave}
           >
-            <div>
-              {cloneItem(children, {
-                nativeEvent,
-                propsFromTrigger
-              })}
-            </div>
+            {cloneItem(children, {
+              nativeEvent,
+              propsFromTrigger
+            })}
           </div>
         )}
       </Portal>
