@@ -84,7 +84,8 @@ class Menu extends Component<MenuProps, MenuState> {
     onHidden: null
   };
 
-  menuRef!: HTMLDivElement;
+  menuRef = React.createRef<HTMLDivElement>();
+  innerDivRef = React.createRef<HTMLDivElement>();
   unsub: (() => boolean)[] = [];
 
   componentDidMount() {
@@ -142,7 +143,12 @@ class Menu extends Component<MenuProps, MenuState> {
       return;
     }
 
-    if (event && event.type === 'click' && e.target === this.menuRef) {
+    if (
+      event &&
+      event.type === 'click' &&
+      (event.target === this.menuRef.current ||
+        event.target === this.innerDivRef.current)
+    ) {
       // Ignore clicks directly on the menu element itself (e.g. if it has padding)
       return;
     }
@@ -158,13 +164,13 @@ class Menu extends Component<MenuProps, MenuState> {
     }
   };
 
-  setRef = (ref: HTMLDivElement) => {
-    this.menuRef = ref;
-  };
-
   setMenuPosition() {
+    if (!this.menuRef.current) return;
     const { innerWidth: windowWidth, innerHeight: windowHeight } = window;
-    const { offsetWidth: menuWidth, offsetHeight: menuHeight } = this.menuRef;
+    const {
+      offsetWidth: menuWidth,
+      offsetHeight: menuHeight
+    } = this.menuRef.current;
     let { x, y } = this.state;
 
     if (x + menuWidth > windowWidth) {
@@ -249,14 +255,16 @@ class Menu extends Component<MenuProps, MenuState> {
           <div
             className={cssClasses}
             style={menuStyle}
-            ref={this.setRef}
+            ref={this.menuRef}
             onMouseEnter={this.onMouseEnter}
             onMouseLeave={this.onMouseLeave}
           >
-            {cloneItem(children, {
-              nativeEvent,
-              propsFromTrigger
-            })}
+            <div ref={this.innerDivRef}>
+              {cloneItem(children, {
+                nativeEvent,
+                propsFromTrigger
+              })}
+            </div>
           </div>
         )}
       </Portal>

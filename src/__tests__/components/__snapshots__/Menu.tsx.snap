@@ -12,14 +12,16 @@ exports[`Menu Should remove null Item from menu 1`] = `
             class="react-contexify"
             style="left: 0px; top: 1px; opacity: 1;"
           >
-            <div
-              class="react-contexify__item"
-              role="presentation"
-            >
+            <div>
               <div
-                class="react-contexify__item__content"
+                class="react-contexify__item"
+                role="presentation"
               >
-                bar
+                <div
+                  class="react-contexify__item__content"
+                >
+                  bar
+                </div>
               </div>
             </div>
           </div>
@@ -38,26 +40,28 @@ exports[`Menu Should remove null Item from menu 1`] = `
           }
         }
       >
-        <Item
-          closeOnClick={true}
-          disabled={false}
-          key=".$.0"
-          nativeEvent={Object {}}
-          onClick={[Function]}
-          propsFromTrigger={Object {}}
-        >
-          <div
-            className="react-contexify__item"
+        <div>
+          <Item
+            closeOnClick={true}
+            disabled={false}
+            key=".$.0"
+            nativeEvent={Object {}}
             onClick={[Function]}
-            role="presentation"
+            propsFromTrigger={Object {}}
           >
             <div
-              className="react-contexify__item__content"
+              className="react-contexify__item"
+              onClick={[Function]}
+              role="presentation"
             >
-              bar
+              <div
+                className="react-contexify__item__content"
+              >
+                bar
+              </div>
             </div>
-          </div>
-        </Item>
+          </Item>
+        </div>
       </div>
     </Portal>
   </Portal>
