@@ -142,6 +142,11 @@ class Menu extends Component<MenuProps, MenuState> {
       return;
     }
 
+    if (event && event.type === 'click' && e.target === this.menuRef) {
+      // Ignore clicks directly on the menu element itself (e.g. if it has padding)
+      return;
+    }
+
     this.unBindWindowEvent();
     this.setState({ visible: false });
   };
