@@ -85,7 +85,6 @@ class Menu extends Component<MenuProps, MenuState> {
   };
 
   menuRef = React.createRef<HTMLDivElement>();
-  innerDivRef = React.createRef<HTMLDivElement>();
   unsub: (() => boolean)[] = [];
 
   componentDidMount() {
@@ -142,12 +141,10 @@ class Menu extends Component<MenuProps, MenuState> {
     ) {
       return;
     }
-
     if (
       event &&
       event.type === 'click' &&
-      (event.target === this.menuRef.current ||
-        event.target === this.innerDivRef.current)
+      (event.target as HTMLElement).classList.contains(styles.ignoreClick)
     ) {
       // Ignore clicks directly on the menu element itself (e.g. if it has padding)
       return;
@@ -238,7 +235,7 @@ class Menu extends Component<MenuProps, MenuState> {
     const { theme, animation, style, className, children } = this.props;
     const { visible, nativeEvent, propsFromTrigger, x, y } = this.state;
 
-    const cssClasses = cx(styles.menu, className, {
+    const cssClasses = cx(styles.menu, styles.ignoreClick, className, {
       [styles.theme + theme]: theme,
       [styles.animationWillEnter + animation]: animation
     });
@@ -259,7 +256,7 @@ class Menu extends Component<MenuProps, MenuState> {
             onMouseEnter={this.onMouseEnter}
             onMouseLeave={this.onMouseLeave}
           >
-            <div ref={this.innerDivRef}>
+            <div className={styles.ignoreClick}>
               {cloneItem(children, {
                 nativeEvent,
                 propsFromTrigger

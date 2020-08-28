@@ -9,10 +9,12 @@ exports[`Menu Should remove null Item from menu 1`] = `
       containerInfo={
         <div>
           <div
-            class="react-contexify"
+            class="react-contexify react-contexify__ignore_click"
             style="left: 0px; top: 1px; opacity: 1;"
           >
-            <div>
+            <div
+              class="react-contexify__ignore_click"
+            >
               <div
                 class="react-contexify__item"
                 role="presentation"
@@ -29,7 +31,7 @@ exports[`Menu Should remove null Item from menu 1`] = `
       }
     >
       <div
-        className="react-contexify"
+        className="react-contexify react-contexify__ignore_click"
         onMouseEnter={[Function]}
         onMouseLeave={[Function]}
         style={
@@ -40,7 +42,9 @@ exports[`Menu Should remove null Item from menu 1`] = `
           }
         }
       >
-        <div>
+        <div
+          className="react-contexify__ignore_click"
+        >
           <Item
             closeOnClick={true}
             disabled={false}

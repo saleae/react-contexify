@@ -12,7 +12,8 @@ export const styles = {
   itemIcon: 'react-contexify__item__icon',
   theme: 'react-contexify__theme--',
   animationWillEnter: 'react-contexify__will-enter--',
-  animationWillLeave: 'react-contexify__will-leave--'
+  animationWillLeave: 'react-contexify__will-leave--',
+  ignoreClick: 'react-contexify__ignore_click'
 };
 
 // I could use enum instead for both interfaces

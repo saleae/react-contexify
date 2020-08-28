@@ -108,7 +108,7 @@ class Submenu extends Component<SubMenuProps, SubMenuState> {
       propsFromTrigger
     } = this.props;
 
-    const cssClasses = cx(styles.item, className, {
+    const cssClasses = cx(styles.item, styles.ignoreClick, className, {
       [`${styles.itemDisabled}`]:
         typeof disabled === 'function'
           ? disabled({
@@ -129,7 +129,11 @@ class Submenu extends Component<SubMenuProps, SubMenuState> {
           {label}
           <span className={styles.submenuArrow}>{arrow}</span>
         </div>
-        <div className={styles.submenu} ref={this.setRef} style={submenuStyle}>
+        <div
+          className={cx(styles.submenu, styles.ignoreClick)}
+          ref={this.setRef}
+          style={submenuStyle}
+        >
           {cloneItem(children, {
             propsFromTrigger,
             nativeEvent: nativeEvent as TriggerEvent

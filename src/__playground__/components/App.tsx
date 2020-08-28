@@ -52,6 +52,7 @@ const MyAwesomeMenu: React.SFC<{
     <Submenu label="Foobar">
       {null}
       <Item onClick={onClick}>Bar</Item>
+      <Item onClick={onClick}>Bar 2</Item>
     </Submenu>
   </Menu>
 );
