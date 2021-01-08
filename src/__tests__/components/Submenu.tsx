@@ -24,7 +24,7 @@ describe('Submenu', () => {
       ({
         right: 200,
         bottom: 200
-      } as ClientRect);
+      } as any);
     const component = mount(
       <Submenu label="bar">
         <Children />

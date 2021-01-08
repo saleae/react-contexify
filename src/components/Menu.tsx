@@ -54,6 +54,14 @@ export interface MenuProps extends StyleProps {
    * Invoked when the menu is hidden.
    */
   onHidden?: () => void;
+
+  /**
+   * menu wrapper props
+   */
+  menuWrapperProps?: Omit<
+    React.HTMLAttributes<HTMLDivElement>,
+    'onMouseEnter' | 'onMouseLeave' | 'style'
+  >;
 }
 
 interface MenuState {
@@ -71,7 +79,8 @@ class Menu extends Component<MenuProps, MenuState> {
     theme: PropTypes.string,
     animation: PropTypes.string,
     className: PropTypes.string,
-    style: PropTypes.object
+    style: PropTypes.object,
+    menuWrapperProps: PropTypes.object
   };
 
   state = {
@@ -232,13 +241,28 @@ class Menu extends Component<MenuProps, MenuState> {
   };
 
   render() {
-    const { theme, animation, style, className, children } = this.props;
+    const {
+      theme,
+      animation,
+      style,
+      className,
+      children,
+      menuWrapperProps
+    } = this.props;
     const { visible, nativeEvent, propsFromTrigger, x, y } = this.state;
+    const { className: wrapperClassName, ...menuWrapperRestProps } =
+      menuWrapperProps || {};
 
-    const cssClasses = cx(styles.menu, styles.ignoreClick, className, {
-      [styles.theme + theme]: theme,
-      [styles.animationWillEnter + animation]: animation
-    });
+    const cssClasses = cx(
+      styles.menu,
+      styles.ignoreClick,
+      wrapperClassName,
+      className,
+      {
+        [styles.theme + theme]: theme,
+        [styles.animationWillEnter + animation]: animation
+      }
+    );
     const menuStyle = {
       ...style,
       left: x,
@@ -255,6 +279,7 @@ class Menu extends Component<MenuProps, MenuState> {
             ref={this.menuRef}
             onMouseEnter={this.onMouseEnter}
             onMouseLeave={this.onMouseLeave}
+            {...menuWrapperRestProps}
           >
             <div className={styles.ignoreClick}>
               {cloneItem(children, {
